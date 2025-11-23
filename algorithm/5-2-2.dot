@@ -1,0 +1,29 @@
+graph BSTAfterDelete9 {
+    node [shape=circle];
+
+    n10 [label="10"];
+    n5  [label="5"];
+    n12 [label="12"];
+    n3  [label="3"];
+    n8  [label="8"];
+    n11 [label="11"];
+    n13 [label="13"];
+    n1  [label="1"];
+    n4  [label="4"];
+    n6  [label="6"];
+
+    // 親子関係（無向）
+    n10 -- n5;
+    n10 -- n12;
+
+    n5 -- n3;
+    n5 -- n8;
+
+    n3 -- n1;
+    n3 -- n4;
+
+    n8 -- n6;
+
+    n12 -- n11;
+    n12 -- n13;
+}

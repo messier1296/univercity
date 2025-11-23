@@ -1,0 +1,378 @@
+<!DOCTYPE html>
+<html lang="ja">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>AIと教育の未来：可能性とリスク</title>
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Noto+Sans+JP:wght@400;700&display=swap" rel="stylesheet">
+    <style>
+        /* --- 変数定義 --- */
+        :root {
+            --bg-color: #1a202c;
+            --text-color: #e2e8f0;
+            --header-color: #ffffff;
+            --accent-color: #4fd1c5;
+        }
+
+        /* --- 基本スタイル --- */
+        * {
+            box-sizing: border-box;
+            margin: 0;
+            padding: 0;
+        }
+
+        html, body {
+            width: 100%;
+            height: 100%;
+            overflow: hidden; /* スライドショー時のスクロールバーを非表示 */
+            background-color: var(--bg-color);
+            color: var(--text-color);
+            font-family: 'Noto Sans JP', sans-serif;
+        }
+
+        /* --- スライドコンテナと各スライドのスタイル --- */
+        #slides-container {
+            width: 100%;
+            height: 100%;
+            position: relative;
+        }
+
+        .slide {
+            width: 100vw;
+            height: 100vh;
+            padding: 5vw;
+            display: flex;
+            flex-direction: column;
+            justify-content: center;
+            align-items: center;
+            text-align: center;
+            position: absolute;
+            top: 0;
+            left: 0;
+            opacity: 0;
+            transition: opacity 0.5s ease-in-out;
+            visibility: hidden;
+        }
+
+        .slide.active {
+            opacity: 1;
+            visibility: visible;
+        }
+
+        .slide-content {
+            max-width: 80vw;
+        }
+        
+        .left-align {
+            text-align: left;
+            align-items: flex-start;
+        }
+
+        /* --- タイポグラフィ --- */
+        h1 {
+            font-size: 5.6vw;
+            color: var(--header-color);
+            font-weight: 700;
+            margin-bottom: 2vh;
+        }
+
+        h2 {
+            font-size: 4.0vw;
+            color: var(--header-color);
+            font-weight: 700;
+            margin-bottom: 3vh;
+            border-left: 5px solid var(--accent-color);
+            padding-left: 1.5vw;
+        }
+
+        p {
+            font-size: 2.4vw;
+            line-height: 1.8;
+        }
+        
+        .quote {
+            font-style: italic;
+            margin-top: 3vh;
+            padding: 2vh 2vw;
+            border-left: 3px solid var(--accent-color);
+            background-color: rgba(255,255,255,0.05);
+            border-radius: 8px;
+        }
+        .quote-author {
+            text-align: right;
+            margin-top: 1vh;
+            font-size: 1.2vw;
+            color: var(--text-color);
+            opacity: 0.8;
+        }
+
+        ul {
+            list-style: none;
+            padding: 0;
+            margin-top: 2vh;
+            text-align: left;
+            width: 100%;
+        }
+
+        li {
+            font-size: 1.5vw;
+            line-height: 1.8;
+            padding-left: 2.5vw;
+            position: relative;
+            margin-bottom: 2vh;
+        }
+
+        li::before {
+            content: '✓';
+            color: var(--accent-color);
+            font-weight: 700;
+            position: absolute;
+            left: 0;
+        }
+        
+        /* --- レイアウトヘルパー --- */
+        .two-columns {
+            display: grid;
+            grid-template-columns: 1fr 1fr;
+            gap: 4vw;
+            width: 100%;
+            text-align: left;
+        }
+
+        /* --- UI要素 --- */
+        #page-number {
+            position: absolute;
+            bottom: 3vh;
+            right: 3vw;
+            font-size: 1.2vw;
+            color: var(--text-color);
+            opacity: 0.7;
+        }
+
+        /* --- 印刷用スタイル --- */
+        @media print {
+            @page {
+                size: 16in 9in; /* 16:9のアスペクト比 */
+                margin: 0;
+            }
+
+            html, body {
+                width: 100%;
+                height: auto;
+                overflow: visible;
+                background-color: var(--bg-color); /* 背景色を強制 */
+                -webkit-print-color-adjust: exact;
+                print-color-adjust: exact;
+            }
+
+            #slides-container {
+                position: static;
+            }
+
+            .slide {
+                width: 100%;
+                height: 100vh; /* 1ページに1スライドを収める */
+                position: relative;
+                opacity: 1 !important;
+                visibility: visible !important;
+                page-break-after: always; /* 各スライドの後に改ページ */
+                display: flex;
+                flex-direction: column;
+                justify-content: center;
+                align-items: center;
+            }
+
+            .slide:last-child {
+                page-break-after: avoid;
+            }
+
+            #page-number {
+                display: none; /* 印刷時にはページ番号を非表示 */
+            }
+        }
+    </style>
+</head>
+<body>
+
+    <main id="slides-container">
+        <!-- Slide 1: タイトル -->
+        <section class="slide active">
+            <div class="slide-content">
+                <p style="color: var(--accent-color); font-size: 1.8vw;">Stanford AI+Education Summitからの洞察</p>
+                <h1 style="font-size: 5vw;">AIと教育の未来</h1>
+                <p style="font-size: 2vw;">可能性とリスク、そして我々が進むべき道</p>
+            </div>
+        </section>
+
+        <!-- Slide 2: 導入：AIと教育の現状 -->
+        <section class="slide left-align">
+            <div class="slide-content">
+                <h2>急速に普及する教育現場のAI</h2>
+                <p>ChatGPTの登場以前から、スタンフォード大学ではAIの教育利用に関する研究が進められていました。</p>
+                <p>しかし、その登場後、状況は一変。わずか数ヶ月で大学生の30%が課題に利用するなど、AIは教育史上最速で普及したツールの一つとなりました。教育現場は、この新技術にどう対応すべきか、まさに模索の最中にあります。</p>
+            </div>
+        </section>
+
+        <!-- Slide 3: AIの可能性 - 中心的な問い -->
+        <section class="slide">
+            <div class="slide-content">
+                <h1 style="color: var(--accent-color);">AIの可能性</h1>
+                <p>How can AI be best used to advance human learning?</p>
+                <div class="quote">
+                    <p>「テクノロジーは、全く新しい教授法への普遍的なアクセスを可能にします。しかし、多くのAIは単に『質の悪い教授法』を自動化するだけにもなりかねません。我々はAIを『新しいタイプの教授法』を創造する方法として考える必要があります。」</p>
+                    <p class="quote-author">- Daniel Schwartz, スタンフォード大学院教育学研究科長</p>
+                </div>
+            </div>
+        </section>
+
+        <!-- Slide 4: 可能性① 教師への支援 -->
+        <section class="slide left-align">
+            <div class="slide-content">
+                <h2>可能性①：教師へのパーソナライズされた支援</h2>
+                <p>優れた教師は効果的な学習の要です。AIは、教師が指導技術を大規模に、かつ個別最適化された形で磨くための強力なツールとなり得ます。</p>
+                <ul>
+                    <li><strong>生徒のシミュレーション:</strong> 新人教師は、混乱を示したり的確な質問を返したりするAIを相手に、授業の練習ができます。</li>
+                    <li><strong>リアルタイムの助言:</strong> 授業中、AIが専門的な教育法に基づき「今、生徒にすべき問い」などをリアルタイムで提案します。</li>
+                    <li><strong>授業後の分析レポート:</strong> AIが生徒の発言時間やエンゲージメントを分析・要約し、教師に具体的なフィードバックを提供します。</li>
+                </ul>
+            </div>
+        </section>
+
+        <!-- Slide 5: 可能性② 学習者の役割の変化 -->
+        <section class="slide left-align">
+            <div class="slide-content">
+                <h2>可能性②：学習者にとって「重要なこと」の変化</h2>
+                <p>AIは教室における「計算機」のような存在になるのでしょうか？ それとも、学習の本質を変える、より大きな存在になるのでしょうか。</p>
+                <div class="two-columns">
+                    <div>
+                        <h3>懸念</h3>
+                        <p>文章作成のような思考プロセスをAIに任せることで、生徒の批判的思考力が損なわれるのではないか？</p>
+                    </div>
+                    <div>
+                        <h3>新たな視点</h3>
+                        <p>単純な作業から解放された学習者は、AIが生成したものを編集・キュレーションし、より深く思考するように。最終的には、より創造的で野心的な「設計者」へと役割を変えることができる。</p>
+                    </div>
+                </div>
+            </div>
+        </section>
+        
+        <!-- Slide 6: 可能性③ 失敗を恐れない学習環境 -->
+        <section class="slide left-align">
+            <div class="slide-content">
+                <h2>可能性③：失敗を恐れない学習環境の創出</h2>
+                <p>「どんな質問も歓迎する」と教師は言いますが、生徒は他者の目を気にして発言をためらいます。AIはこの心理的障壁を取り除くことができます。</p>
+                <ul>
+                    <li><strong>評価されない安心感:</strong> AIは人間のように評価的な反応をしないため、学習者は安心して間違い、リスクを取り、積極的に関わることができます。</li>
+                    <li><strong>ソフトスキルの練習:</strong> コミュニケーションや問題解決能力といった、実践が難しいソフトスキルを、AIを相手に気兼ねなく練習できます。</li>
+                </ul>
+            </div>
+        </section>
+
+        <!-- Slide 7: AIのリスク - 導入 -->
+        <section class="slide">
+            <div class="slide-content">
+                <h1 style="color: #f56565;">AIの重大なリスク</h1>
+                <p>AIは決して万能薬ではありません。<br>その導入には、慎重に考慮すべき重大なリスクが伴います。</p>
+            </div>
+        </section>
+        
+        <!-- Slide 8: リスク① 文化的多様性の欠如 -->
+        <section class="slide left-align">
+            <div class="slide-content">
+                <h2>リスク①：文化的多様性の欠如</h2>
+                <p>現在のAIモデルが生成する言語は、教育システムが対象とする生徒の多様性を反映していません。</p>
+                <ul>
+                    <li><strong>具体例：</strong>アフリカ系アメリカ人の文体で話すよう指示したところ、AIは単に文頭に "yo" を付け加えるだけでした。</li>
+                    <li><strong>問題点：</strong>このような表層的な模倣は、多様な背景を持つ学習者の本当の声を捉えきれず、公平で安全な学習環境を損なう恐れがあります。</li>
+                </ul>
+            </div>
+        </section>
+
+        <!-- Slide 9: リスク② 学習に最適化されていない -->
+        <section class="slide left-align">
+            <div class="slide-content">
+                <h2>リスク②：「学び」ではなく「答え」を最適化</h2>
+                <p>ChatGPTのようなモデルは、教育的な効果ではなく、応答の速さや正確さを最大化するように設計されています。</p>
+                <ul>
+                    <li><strong>具体例：</strong>AIは、学習者が概念を深く理解したり、好奇心を刺激されたりするのを待たず、即座に「答え」を提示してしまいます。</li>
+                    <li><strong>問題点：</strong>この性質は、教育学的に望ましい「学びのプロセス」とはしばしば対立します。</li>
+                </ul>
+            </div>
+        </section>
+
+        <!-- Slide 10: リスク③ もっともらしい間違い -->
+        <section class="slide left-align">
+            <div class="slide-content">
+                <h2>リスク③：流暢に、しかし完全に間違える</h2>
+                <p>AIは、自信を持って誤った情報を生成することがあります（ハルシネーション）。</p>
+                <ul>
+                    <li><strong>具体例：</strong>スタンフォードの研究室が開発した数学教師ボットは、完璧な文章で褒めたり励ましたりしながら、最終的な計算結果を間違えました。</li>
+                    <li><strong>問題点：</strong>その応答は非常に流暢で説得力があるため、学習者が誤った情報を真実として受け入れてしまう危険性があります。</li>
+                </ul>
+            </div>
+        </section>
+        
+        <!-- Slide 11: 正しい導入に向けた取り組み -->
+        <section class="slide left-align">
+             <div class="slide-content">
+                <h2>正しい導入に向けた取り組み</h2>
+                 <p>AIの急速な進歩は、学習の動機付けに影響を与え始めています。</p>
+                 <div class="quote">
+                     <p>ある学生は「長年学んできたコーディングスキルがChatGPTのせいで無価値になるのでは」と涙ながらに将来への不安を語りました。<br>これは多くの学生が直面する「モチベーションの危機」の表れです。</p>
+                     <p class="quote-author">- Chris Piech, スタンフォード大学助教</p>
+                 </div>
+                 <p style="margin-top: 3vh;">だからこそ今、研究者、教育者、産業界が協力し、倫理的で公平、かつ安全な方法でAIの可能性を最大限に引き出すための議論が不可欠です。</p>
+             </div>
+        </section>
+
+        <!-- Slide 12: 議論の投げかけ -->
+        <section class="slide">
+            <div class="slide-content">
+                <h1>私たちはAIと共に、<br>どのような教育を創造していくべきか？</h1>
+                <p style="margin-top: 4vh;">AIの教育への影響はまだ不透明ですが、変化はすでに始まっています。<br>テクノロジーをどう活用し、人間の学びを豊かにしていくか。<br>その答えは、私たち一人ひとりの選択にかかっています。</p>
+                <p style="margin-top: 5vh; font-size: 2vw; color: var(--accent-color);">ご清聴ありがとうございました。</p>
+            </div>
+        </section>
+    </main>
+
+    <div id="page-number"></div>
+
+    <script>
+        const slides = document.querySelectorAll('.slide');
+        const pageNumberEl = document.getElementById('page-number');
+        let currentSlide = 0;
+        const totalSlides = slides.length;
+
+        function showSlide(index) {
+            slides.forEach((slide, i) => {
+                slide.classList.toggle('active', i === index);
+            });
+            pageNumberEl.textContent = `${index + 1} / ${totalSlides}`;
+        }
+
+        function nextSlide() {
+            currentSlide = (currentSlide + 1) % totalSlides;
+            showSlide(currentSlide);
+        }
+
+        function prevSlide() {
+            currentSlide = (currentSlide - 1 + totalSlides) % totalSlides;
+            showSlide(currentSlide);
+        }
+
+        document.addEventListener('keydown', (event) => {
+            if (event.key === 'ArrowRight' || event.key === ' ') {
+                nextSlide();
+            } else if (event.key === 'ArrowLeft') {
+                prevSlide();
+            }
+        });
+
+        // 初期表示
+        showSlide(currentSlide);
+    </script>
+
+</body>
+</html>

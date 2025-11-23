@@ -1,0 +1,26 @@
+graph HeapAfterDeleteMin {
+    node [shape=circle];
+
+    n1 [label="3"];
+    n2 [label="4"];
+    n3 [label="5"];
+    n4 [label="8"];
+    n5 [label="6"];
+    n6 [label="7"];
+    n7 [label="8"];
+    n8 [label="9"];
+    n9 [label="10"];
+
+    // 親子関係（無向）
+    n1 -- n2;
+    n1 -- n3;
+
+    n2 -- n4;
+    n2 -- n5;
+
+    n3 -- n6;
+    n3 -- n7;
+
+    n4 -- n8;
+    n4 -- n9;
+}
