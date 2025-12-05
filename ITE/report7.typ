@@ -89,3 +89,51 @@ $R_3 = {(A,0),(A,1),(B,1),(B,0)}$
 
 成績:string
 
+= 課題7-4
+
+```text
+
+a. 商品名 like 'コピー用紙%'
+
+b. 商品名 like 'コピー用紙A_'
+
+c. 商品名 like 'コピー用紙A_%'
+
+d 商品名 not like 'コピー用紙A_'
+
+```
+
+```text
+1 コピー用紙
+2 コピー用紙A4
+3 コピー用紙B5
+4 コピー用紙A4用紙10パックセット
+```
+
+a: 1,2,3,4
+
+b: 2,4
+
+c: 2,3,4
+
+d: 1,4
+
+= 課題7-5
+
+== Step1
+
+#image("image.png")
+
+== Step2
+
+#image("image2.png")
+
+
+== Step3
+
+#image("image3.png")
+
+== Step4
+
+#image("image4.png")
+
